@@ -269,9 +269,12 @@ class WebSocketConnection(Thread):
         :return:
         """
         self.log.debug("send_ping(): Sending ping to API..")
-        self.socket.send(json.dumps({'event': 'ping'}))
-        self.pong_timer = Timer(self.pong_timeout, self._check_pong)
-        self.pong_timer.start()
+        try:
+            self.socket.send(json.dumps({'event': 'ping'}))
+            self.pong_timer = Timer(self.pong_timeout, self._check_pong)
+            self.pong_timer.start()
+        except websocket.WebSocketConnectionClosedException:
+            self.log.error("send_ping(): Did not send out payload {'event': 'ping'} - client not connected - try reconnect", exc_info=1)
 
     def _check_pong(self):
         """Checks if a Pong message was received.
