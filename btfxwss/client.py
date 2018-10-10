@@ -161,12 +161,10 @@ class BtfxWss:
     def config(self, decimals_as_strings=True, ts_as_dates=False,
                sequencing=False, ts=False, **kwargs):
         """Send configuration to websocket server
-
         :param decimals_as_strings: bool, turn on/off decimals as strings
         :param ts_as_dates: bool, decide to request timestamps as dates instead
         :param sequencing: bool, turn on sequencing
-	:param ts: bool, request the timestamp to be appended to every array
-               sent by the server
+        :param ts: bool, request the timestamp to be appended to every array sent by the server
         :param kwargs:
         :return:
         """
